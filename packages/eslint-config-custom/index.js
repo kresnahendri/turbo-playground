@@ -1,7 +1,13 @@
 module.exports = {
-  extends: ["next", "turbo", "prettier"],
+  extends: ["ts-kresnahendri"],
   rules: {
-    "@next/next/no-html-link-for-pages": "off",
-    "react/jsx-key": "off",
+    semi: ["error", "never"],
+    "react/react-in-jsx-scope": "off",
+    "import/no-named-as-default": "off",
+    "class-methods-use-this": "off",
+    "no-useless-constructor": "off",
+    "react/function-component-definition": "off",
+    "dot-notation": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
   },
-};
+}
