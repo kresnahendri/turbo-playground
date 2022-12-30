@@ -1,0 +1,33 @@
+{
+  "name": "binance-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "dev:scanner": "ts-node-dev --respawn src/scanners/agg-trades-scanner.ts",
+    "start": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@marblejs/core": "^4.0.3",
+    "@marblejs/http": "^4.0.3",
+    "@marblejs/messaging": "^4.0.3",
+    "@marblejs/middleware-body": "^4.0.3",
+    "@marblejs/middleware-cors": "^4.0.3",
+    "@marblejs/middleware-io": "^4.0.3",
+    "@marblejs/middleware-logger": "^4.0.3",
+    "binance-api-node": "^0.12.1",
+    "dayjs": "^1.11.7",
+    "fp-ts": "^2.13.1",
+    "rxjs": "^7.6.0",
+    "technicalindicators": "^3.1.0",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.12",
+    "eslint": "7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.5.3"
+  }
+}
