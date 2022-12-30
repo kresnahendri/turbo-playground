@@ -85,7 +85,7 @@ export const main$ = () => {
   )
 }
 
-export const runner$ = interval(30_000)
+export const runner$ = interval(60_000)
   .pipe(startWith(0), mergeMap(main$))
   .pipe(
     map((it) => {
