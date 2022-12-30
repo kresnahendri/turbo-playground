@@ -1,5 +1,5 @@
 import { interval, map, mergeMap, of, startWith, toArray, zip } from "rxjs"
-import { EMA } from "technicalindicators"
+import { EMA, bullish, bearish } from "technicalindicators"
 import {
   getCandles$,
   getCoinInfos$,
@@ -26,6 +26,7 @@ const calculateEMA = (values: number[], period = 7) => {
     pricePositionOverEma,
   }
 }
+
 export const main$ = () => {
   return getCoinInfos$().pipe(
     mergeMap((infos) => {
@@ -35,10 +36,26 @@ export const main$ = () => {
           return getCandles$({ symbol, interval: "5m" }).pipe(
             map((candles) => {
               const ema = calculateEMA(candles.map((it) => it.close))
+              const isBullish = bullish({
+                open: candles.map((it) => it.open),
+                close: candles.map((it) => it.close),
+                high: candles.map((it) => it.high),
+                low: candles.map((it) => it.low),
+                reversedInput: true,
+              })
+              const isBearish = bearish({
+                open: candles.map((it) => it.open),
+                close: candles.map((it) => it.close),
+                high: candles.map((it) => it.high),
+                low: candles.map((it) => it.low),
+                reversedInput: true,
+              })
               return {
                 symbol,
                 candles,
                 ta: {
+                  isBullish,
+                  isBearish,
                   ema: {
                     values: ema.values,
                     latest: ema.latest,
@@ -109,6 +126,8 @@ export const runner$ = interval(60_000)
         volumeBuy: coin.aggTrades.volumeBuy,
         volumeSell: coin.aggTrades.volumeSell,
         buySellRatio: coin.aggTrades.buySellRatio,
+        isBullish: coin.ta.isBullish,
+        isBearish: coin.ta.isBearish,
         signal,
       }
       return result

@@ -11,6 +11,8 @@ type Response = {
   volumeSell: number
   buySellRatio: number
   signal: "sell" | "buy" | null
+  isBullish: boolean
+  isBearish: boolean
 }
 export default function Web() {
   const data = useQuery<Response, Error>(
@@ -68,6 +70,8 @@ export default function Web() {
                 <p>B/S Ratio: {it.buySellRatio.toFixed(2)}</p>
                 <p>EMA distance: {it.distanceP.toFixed(2)}</p>
                 <p>Price-EMA Position: {it.pricePos}</p>
+                <p>Bullish: {it.isBullish ? "Yes" : "No"}</p>
+                <p>Bearish: {it.isBearish ? "Yes" : "No"}</p>
               </div>
             </div>
           ))
